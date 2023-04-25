@@ -155,7 +155,39 @@ const states = [
 ];
 
 function App() {
-  return <div id="main"></div>;
+  const[map,setmap]=useState(new Map());
+  // console.log(map);
+  
+  return (<div id="main">
+    <ul>{map.get("Madhya Pradesh")}
+      { 
+        states.map((states)=><li onClick={
+                                ()=>setmap(
+                                  prevMap => {
+                                    const nextMap = new Map(prevMap);
+                                    nextMap.set(states.name, true);
+                                    return nextMap;
+                                  })} key={states.name}>{states.name}
+                                  {map.get(states.name)&&<ul>
+                                      {states.cities.map(cities=><li onClick={
+                                          ()=>setmap(
+                                          prevMap => {
+                                            const nextMap = new Map(prevMap);
+                                            nextMap.set(cities.name, true);
+                                            return nextMap;
+                                          })}  key={cities.name}>{cities.name}{
+                                            map.get(cities.name)&&<ul>
+                                              {
+                                                cities.towns.map(towns=><li>{towns.name}</li>)
+                                              }
+                                            </ul>
+                                          }</li>)}
+                                      </ul>}
+                        
+                        </li>)
+      }
+    </ul>
+  </div>)
 }
 
 export default App;
