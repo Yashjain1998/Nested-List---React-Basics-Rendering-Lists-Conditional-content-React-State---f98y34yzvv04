@@ -161,7 +161,7 @@ function App() {
   return (<div id="main">
     <ul>{map.get("Madhya Pradesh")}
       { 
-        states.map((states)=><li onClick={
+        states.map((states,i)=><li id={"state"+(i+1)} onClick={
                                 ()=>setmap(
                                   prevMap => {
                                     const nextMap = new Map(prevMap);
@@ -169,7 +169,7 @@ function App() {
                                     return nextMap;
                                   })} key={states.name}>{states.name}
                                   {map.get(states.name)&&<ul>
-                                      {states.cities.map(cities=><li onClick={
+                                      {states.cities.map((cities,i)=><li id={"city"+(i+1)} onClick={
                                           ()=>setmap(
                                           prevMap => {
                                             const nextMap = new Map(prevMap);
@@ -178,7 +178,7 @@ function App() {
                                           })}  key={cities.name}>{cities.name}{
                                             map.get(cities.name)&&<ul>
                                               {
-                                                cities.towns.map(towns=><li>{towns.name}</li>)
+                                                cities.towns.map((towns,i)=><li id={"town"+(i+1)}>{towns.name}</li>)
                                               }
                                             </ul>
                                           }</li>)}
